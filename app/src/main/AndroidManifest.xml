@@ -14,7 +14,7 @@
         android:name=".DeviceHolderAPp"
         tools:targetApi="31">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC0oabmiFJOKl_Y3Aa5eArILkqkGmiTaFw"
+            android:value=""
             />
         <activity
             android:name=".MainActivity"

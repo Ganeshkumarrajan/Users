@@ -1,6 +1,7 @@
 package com.anonymous.users.ui.theme.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -17,21 +18,25 @@ import com.anonymous.users.ui.theme.component.properties.StickerValue
 import com.anonymous.users.ui.theme.component.properties.UserImageProperties
 
 @Composable
-fun DeviceHolderItem(properties: DeviceHolderItemProperties) {
+fun DeviceHolderItem(properties: DeviceHolderItemProperties, onItemSelected: (Int) -> (Unit)) {
     Box(
         Modifier
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
         Column(
-            modifier = Modifier.padding(top = 16.dp, bottom = 1.dp, start = 5.dp, end = 5.dp)
+            modifier = Modifier
+                .padding(top = 16.dp, bottom = 1.dp, start = 5.dp, end = 5.dp)
+                .clickable {
+                    onItemSelected.invoke(properties.id)
+                }
         ) {
 
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
 
-            ) {
+                ) {
 
                 if (properties.imageURL?.isNotEmpty() == true) {
                     UserImage(UserImageProperties(properties.imageURL))
@@ -86,7 +91,6 @@ fun PreViewDeviceHolderItem() {
     UsersTheme() {
         Column() {
 
-
             DeviceHolderItem(
                 DeviceHolderItemProperties(
                     1, "Savannah Nguyen", "Male",
@@ -100,8 +104,6 @@ fun PreViewDeviceHolderItem() {
                     imageText = "SN"
                 )
             )
-
-
 
             DeviceHolderItem(
                 DeviceHolderItemProperties(
