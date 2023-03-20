@@ -59,6 +59,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation 'androidx.compose.material:material:1.3.1'
     implementation 'androidx.navigation:navigation-runtime-ktx:2.5.3'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -101,4 +102,6 @@ dependencies {
 
     // Optionally, you can include the widgets library for ScaleBar, etc.
     implementation 'com.google.maps.android:maps-compose-widgets:2.11.2'
+
+
 }

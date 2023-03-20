@@ -2,7 +2,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.anonymous.users.presentation.DeviceHolderListScreen
+import com.anonymous.users.presentation.list.DeviceHolderListScreen
+import com.anonymous.users.presentation.details.DeviceHolderDetailsScreen
 
 @Composable
 fun NavigationApp(navController: NavHostController) {
@@ -14,8 +15,8 @@ fun NavigationApp(navController: NavHostController) {
             DeviceHolderListScreen(navController)
         }
         composable(route = "${ScreenNames.Details.route}/{userID}") { backStackEntry ->
-            val postId = backStackEntry.arguments?.getString("userID") ?: ""
-
+            val userID = backStackEntry.arguments?.getString("userID") ?: ""
+            DeviceHolderDetailsScreen(userID)
         }
     }
 }

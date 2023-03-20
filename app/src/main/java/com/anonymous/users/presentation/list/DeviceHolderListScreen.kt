@@ -1,5 +1,6 @@
-package com.anonymous.users.presentation
+package com.anonymous.users.presentation.list
 
+import ScreenNames
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.anonymous.users.presentation.base.UIState
 import com.anonymous.users.ui.theme.component.DeviceHolderItem
 import com.anonymous.users.ui.theme.component.properties.DeviceHolderItemProperties
 
@@ -20,28 +22,29 @@ fun DeviceHolderListScreen(
     navController: NavController,
     viewModel: DeviceHolderViewModel = hiltViewModel()
 ) {
-    Column(modifier = Modifier
-        .padding(10.dp)
-        .background(color = Color.White)) {
+    Column(
+        modifier = Modifier
+            .padding(10.dp)
+            .background(color = Color.White)
+    ) {
         when (val result = viewModel.holders.collectAsState().value) {
             is UIState.Success -> {
-                OnSuccess(result.data)
+                OnSuccess(result.data, navController)
             }
             else -> {}
         }
     }
 
-
 }
 
 
 @Composable
-private fun OnSuccess(data: List<DeviceHolderItemProperties>) {
+private fun OnSuccess(data: List<DeviceHolderItemProperties>, navController: NavController) {
     LazyColumn() {
         items(data) { holder ->
             Column(Modifier.background(color = Color.White)) {
                 DeviceHolderItem(properties = holder) {
-
+                    navController.navigate("${ScreenNames.Details.route}/$it")
                 }
             }
         }

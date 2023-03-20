@@ -1,7 +1,7 @@
 package com.anonymous.users.presentation.di
 
 import com.anonymous.users.BuildConfig
-import com.anonymous.users.data.DeviceHolderService
+import com.anonymous.users.data.service.DeviceHolderService
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides

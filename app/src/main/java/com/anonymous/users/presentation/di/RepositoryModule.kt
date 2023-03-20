@@ -1,9 +1,19 @@
 package com.anonymous.users.presentation.di
 
 
+import android.app.Application
 import com.anonymous.users.data.*
-import com.anonymous.users.domain.DeviceHolderDomain
-import com.anonymous.users.domain.DeviceHolderRepository
+import com.anonymous.users.data.GeoLocation.GeoLocation
+import com.anonymous.users.data.GeoLocation.GeoLocationImpl
+import com.anonymous.users.data.base.NetworkToDomainMapper
+import com.anonymous.users.data.details.UserDetailsNetwork
+import com.anonymous.users.data.details.UserDetailsNetworkToDomainMapper
+import com.anonymous.users.data.deviceHolderList.DeviceHolderListNetworkToDomain
+import com.anonymous.users.data.deviceHolderList.DeviceHolderNetwork
+import com.anonymous.users.data.service.DeviceHolderService
+import com.anonymous.users.domain.details.UserDetailsDomain
+import com.anonymous.users.domain.holderList.DeviceHolderDomain
+import com.anonymous.users.domain.repository.DeviceHolderRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,10 +27,20 @@ class RepositoryModule {
         DeviceHolderListNetworkToDomain()
 
     @Provides
+    fun provideGeoConverter(context: Application): GeoLocation =
+        GeoLocationImpl(context)
+
+
+    @Provides
+    fun provideUserDetailsNetworkToDomain(location: GeoLocation): NetworkToDomainMapper<UserDetailsNetwork, UserDetailsDomain> =
+        UserDetailsNetworkToDomainMapper(location)
+
+    @Provides
     fun provideDeviceHolderRepository(
         mapper: DeviceHolderListNetworkToDomain,
-        deviceHolderService: DeviceHolderService
+        deviceHolderService: DeviceHolderService,
+        userDetailsNetworkToDomainMapper: UserDetailsNetworkToDomainMapper
     ): DeviceHolderRepository =
-        DeviceHolderRepositoryImpl(deviceHolderService, mapper)
+        DeviceHolderRepositoryImpl(deviceHolderService, mapper, userDetailsNetworkToDomainMapper)
 
 }

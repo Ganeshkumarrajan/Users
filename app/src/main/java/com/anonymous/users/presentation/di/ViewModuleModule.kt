@@ -1,6 +1,7 @@
 package com.anonymous.users.presentation.di
 
-import com.anonymous.users.presentation.DeviceHolderMapperDomainToUi
+import com.anonymous.users.presentation.details.UserDetailsMapperDomainToUI
+import com.anonymous.users.presentation.list.DeviceHolderMapperDomainToUi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,4 +14,7 @@ class ViewModuleModule {
     @Provides
     fun provideDeviceHolderUIMapper(): DeviceHolderMapperDomainToUi =
         DeviceHolderMapperDomainToUi()
+
+    @Provides
+    fun provideUserDetailsMapper(): UserDetailsMapperDomainToUI = UserDetailsMapperDomainToUI()
 }

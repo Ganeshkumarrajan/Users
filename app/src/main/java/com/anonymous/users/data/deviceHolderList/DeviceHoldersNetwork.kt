@@ -1,4 +1,4 @@
-package com.anonymous.users.data
+package com.anonymous.users.data.deviceHolderList
 
 data class DeviceHolderNetwork(
     val customers: List<Customer?>?

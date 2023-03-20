@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,7 +17,7 @@ import com.anonymous.users.ui.theme.component.properties.StickerValue
 import com.anonymous.users.ui.theme.component.properties.UserImageProperties
 
 @Composable
-fun DeviceHolderItem(properties: DeviceHolderItemProperties, onItemSelected: (Int) -> (Unit)) {
+fun DeviceHolderItem(properties: DeviceHolderItemProperties, onItemSelected: ((Int) -> Unit?)? = null) {
     Box(
         Modifier
             .fillMaxWidth()
@@ -28,37 +27,38 @@ fun DeviceHolderItem(properties: DeviceHolderItemProperties, onItemSelected: (In
             modifier = Modifier
                 .padding(top = 16.dp, bottom = 1.dp, start = 5.dp, end = 5.dp)
                 .clickable {
-                    onItemSelected.invoke(properties.id)
+                    onItemSelected?.invoke(properties.id)
                 }
         ) {
 
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-
                 ) {
 
-                if (properties.imageURL?.isNotEmpty() == true) {
-                    UserImage(UserImageProperties(properties.imageURL))
-                }
+                FindImageView(properties.imageURL?:"", properties.imageText?:"")
 
-                if (properties.imageText?.isNotEmpty() == true) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(
-                                color = MaterialTheme.colors.onSurface,
-                                shape = RoundedCornerShape(24.dp)
-                            ),
-                    ) {
-                        TextImage(
-                            name = properties.imageText,
-                            modifier = Modifier.wrapContentSize()
-                        )
-                    }
-                }
+//                if (properties.imageURL?.isNotEmpty() == true) {
+//                    UserImage(UserImageProperties(properties.imageURL))
+//                }
+//
+//                if (properties.imageText?.isNotEmpty() == true) {
+//                    Column(
+//                        verticalArrangement = Arrangement.Center,
+//                        horizontalAlignment = Alignment.CenterHorizontally,
+//                        modifier = Modifier
+//                            .size(48.dp)
+//                            .background(
+//                                color = MaterialTheme.colors.onSurface,
+//                                shape = RoundedCornerShape(24.dp)
+//                            ),
+//                    ) {
+//                        TextImage(
+//                            name = properties.imageText,
+//                            modifier = Modifier.wrapContentSize()
+//                        )
+//                    }
+//                }
 
                 Column(Modifier.padding(start = 12.dp)) {
 

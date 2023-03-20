@@ -1,18 +1,20 @@
 package com.anonymous.users.data
 
-import com.anonymous.users.domain.DeviceHolderDomain
-import com.anonymous.users.domain.DeviceHolderRepository
-import com.skydoves.sandwich.ApiResponse
-import com.skydoves.sandwich.onError
-import com.skydoves.sandwich.onException
-import com.skydoves.sandwich.onSuccess
-import kotlinx.coroutines.flow.flow
+import com.anonymous.users.data.base.NetworkToDomainMapper
+import com.anonymous.users.data.base.convertToNetworkResult
+import com.anonymous.users.data.details.UserDetailsNetwork
+import com.anonymous.users.data.deviceHolderList.DeviceHolderNetwork
+import com.anonymous.users.data.service.DeviceHolderService
+import com.anonymous.users.domain.details.UserDetailsDomain
+import com.anonymous.users.domain.holderList.DeviceHolderDomain
+import com.anonymous.users.domain.repository.DeviceHolderRepository
+
 import javax.inject.Inject
 
 class DeviceHolderRepositoryImpl @Inject constructor(
     private val service: DeviceHolderService,
-    private val deviceHolderMapListMapper: NetworkToDomainMapper
-    <DeviceHolderNetwork?, List<DeviceHolderDomain>>
+    private val deviceHolderMapListMapper: NetworkToDomainMapper<DeviceHolderNetwork?, List<DeviceHolderDomain>>,
+    private val userDetailsMapper: NetworkToDomainMapper<UserDetailsNetwork, UserDetailsDomain>,
 ) :
     DeviceHolderRepository {
     override suspend fun getDeviceHolders(): List<DeviceHolderDomain> =
@@ -20,42 +22,7 @@ class DeviceHolderRepositoryImpl @Inject constructor(
         convertToNetworkResult(service.getDeviceHolderList(), deviceHolderMapListMapper)
             ?: emptyList()
 
+    override suspend fun getUserDetails(id: String): UserDetailsDomain? =
+        convertToNetworkResult(service.getUserDetails(id), userDetailsMapper)
 
-}
-
-interface NetworkToDomainMapper<I, O> {
-    fun mapTo(input: I): O
-}
-
-class DeviceHolderListNetworkToDomain @Inject constructor() :
-    NetworkToDomainMapper<DeviceHolderNetwork?, List<DeviceHolderDomain>> {
-    override fun mapTo(input: DeviceHolderNetwork?): List<DeviceHolderDomain> =
-        input?.customers?.map {
-            DeviceHolderDomain(
-                it?.id ?: 0,
-                it?.firstName ?: "",
-                it?.lastName ?: "",
-                it?.gender ?: "",
-                it?.phoneNumber ?: "",
-                it?.imageUrl ?: "",
-                it?.stickers ?: emptyList()
-            )
-        } ?: emptyList()
-}
-
-internal fun <I, O> convertToNetworkResult(
-    data: ApiResponse<I>,
-    mapper: NetworkToDomainMapper<I, O>
-): O? {
-    var result: O? = null
-
-    data.onSuccess {
-        result = mapper.mapTo(this.data)
-    }.onError {
-        result = null
-    }.onException {
-        result = null
-    }
-
-    return result
 }

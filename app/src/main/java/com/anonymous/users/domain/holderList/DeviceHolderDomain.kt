@@ -1,4 +1,6 @@
-package com.anonymous.users.domain
+package com.anonymous.users.domain.holderList
+
+import com.google.android.gms.maps.model.LatLng
 
 data class DeviceHolderDomain(
     val id: Int,
