@@ -17,7 +17,8 @@ private val DarkColorPalette = darkColors(
     onSecondary = lightRedTwo,
     onBackground = grey,
     onSurface = BackgroundGrey,
-    secondaryVariant = LineGrey
+    secondaryVariant = LineGrey,
+    onError = blue
 )
 
 private val LightColorPalette = lightColors(
@@ -30,7 +31,9 @@ private val LightColorPalette = lightColors(
     onSecondary = lightRedTwo,
     onBackground = grey,
     onSurface = BackgroundGrey,
-    secondaryVariant = LineGrey)
+    secondaryVariant = LineGrey,
+    onError = blue
+)
 
 @Composable
 fun UsersTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {

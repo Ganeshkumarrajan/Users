@@ -56,14 +56,14 @@ fun StickersName(name: String, modifier: Modifier) {
 }
 
 @Composable
-fun TextImage(name: String, modifier: Modifier) {
+fun TextImage(name: String) {
     Text(
         textAlign = TextAlign.Justify,
         text = name,
         style = MaterialTheme.typography.subtitle2,
-        color = MaterialTheme.colors.secondary,)
+        color = MaterialTheme.colors.secondary,
+    )
 }
-
 
 @Composable
 fun SelectedStickersName(name: String, modifier: Modifier) {
@@ -77,5 +77,25 @@ fun SelectedStickersName(name: String, modifier: Modifier) {
         text = name,
         style = MaterialTheme.typography.subtitle1,
         color = MaterialTheme.colors.onPrimary
+    )
+}
+
+@Composable
+fun Address(text: String, modifier: Modifier) {
+    Text(
+        modifier = modifier,
+        text = text,
+        style = MaterialTheme.typography.body1,
+        color = MaterialTheme.colors.primary
+    )
+}
+
+@Composable
+fun Name(text: String, modifier: Modifier) {
+    Text(
+        modifier = modifier,
+        text = text,
+        style = MaterialTheme.typography.h5,
+        color = MaterialTheme.colors.primary
     )
 }

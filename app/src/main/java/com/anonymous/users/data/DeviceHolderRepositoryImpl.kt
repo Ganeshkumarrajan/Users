@@ -8,7 +8,6 @@ import com.anonymous.users.data.service.DeviceHolderService
 import com.anonymous.users.domain.details.UserDetailsDomain
 import com.anonymous.users.domain.holderList.DeviceHolderDomain
 import com.anonymous.users.domain.repository.DeviceHolderRepository
-
 import javax.inject.Inject
 
 class DeviceHolderRepositoryImpl @Inject constructor(
@@ -24,5 +23,4 @@ class DeviceHolderRepositoryImpl @Inject constructor(
 
     override suspend fun getUserDetails(id: String): UserDetailsDomain? =
         convertToNetworkResult(service.getUserDetails(id), userDetailsMapper)
-
 }

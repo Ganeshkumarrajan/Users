@@ -1,10 +1,9 @@
 package com.anonymous.users.presentation.details
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.anonymous.users.domain.GetUserDetailsUseCase
 import com.anonymous.users.domain.base.NetworkResult
+import com.anonymous.users.domain.details.GetUserDetailsUseCase
 import com.anonymous.users.domain.details.UserDetailsDomain
 import com.anonymous.users.presentation.base.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel

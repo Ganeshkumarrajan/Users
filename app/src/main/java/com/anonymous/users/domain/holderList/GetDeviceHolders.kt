@@ -21,8 +21,3 @@ class GetDeviceHoldersUseCaseImpl(private val repository: DeviceHolderRepository
             emit(NetworkResult.Error())
         }.flowOn(Dispatchers.IO)
 }
-
-
-
-
-

@@ -22,5 +22,4 @@ data class Address(
 ) {
     override fun toString(): String =
         "$street $city $state $zip $country"
-
 }

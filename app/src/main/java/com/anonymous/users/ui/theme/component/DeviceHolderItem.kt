@@ -1,10 +1,12 @@
 package com.anonymous.users.ui.theme.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,10 +16,12 @@ import com.anonymous.users.ui.theme.UsersTheme
 import com.anonymous.users.ui.theme.component.properties.DeviceHolderItemProperties
 import com.anonymous.users.ui.theme.component.properties.StickerItemsProperties
 import com.anonymous.users.ui.theme.component.properties.StickerValue
-import com.anonymous.users.ui.theme.component.properties.UserImageProperties
 
 @Composable
-fun DeviceHolderItem(properties: DeviceHolderItemProperties, onItemSelected: ((Int) -> Unit?)? = null) {
+fun DeviceHolderItem(
+    properties: DeviceHolderItemProperties,
+    onItemSelected: ((Int) -> Unit?)? = null
+) {
     Box(
         Modifier
             .fillMaxWidth()
@@ -31,34 +35,11 @@ fun DeviceHolderItem(properties: DeviceHolderItemProperties, onItemSelected: ((I
                 }
         ) {
 
-
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                ) {
+            ) {
 
-                FindImageView(properties.imageURL?:"", properties.imageText?:"")
-
-//                if (properties.imageURL?.isNotEmpty() == true) {
-//                    UserImage(UserImageProperties(properties.imageURL))
-//                }
-//
-//                if (properties.imageText?.isNotEmpty() == true) {
-//                    Column(
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally,
-//                        modifier = Modifier
-//                            .size(48.dp)
-//                            .background(
-//                                color = MaterialTheme.colors.onSurface,
-//                                shape = RoundedCornerShape(24.dp)
-//                            ),
-//                    ) {
-//                        TextImage(
-//                            name = properties.imageText,
-//                            modifier = Modifier.wrapContentSize()
-//                        )
-//                    }
-//                }
+                FindImageView(properties.imageURL ?: "", properties.imageText ?: "")
 
                 Column(Modifier.padding(start = 12.dp)) {
 
@@ -74,16 +55,13 @@ fun DeviceHolderItem(properties: DeviceHolderItemProperties, onItemSelected: ((I
                         MobileNumber(properties.mobileNumber, Modifier)
                         StickerItems(properties = properties.stickerItemsProperties)
                     }
-
                 }
-
             }
 
             LineView()
         }
     }
 }
-
 
 @Preview
 @Composable
@@ -118,8 +96,6 @@ fun PreViewDeviceHolderItem() {
                     imageText = "KW"
                 )
             )
-
-
         }
     }
 }

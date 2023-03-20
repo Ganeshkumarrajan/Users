@@ -1,7 +1,7 @@
 package com.anonymous.users.data.details
 
-import com.anonymous.users.data.GeoLocation.GeoLocation
 import com.anonymous.users.data.base.NetworkToDomainMapper
+import com.anonymous.users.data.geoLocation.GeoLocation
 import com.anonymous.users.domain.details.UserDetailsDomain
 import javax.inject.Inject
 

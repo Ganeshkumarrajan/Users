@@ -19,6 +19,5 @@ interface DomainToUIMapper<I, O> {
                 value == "Ban"
             )
         }
-
     }
 }

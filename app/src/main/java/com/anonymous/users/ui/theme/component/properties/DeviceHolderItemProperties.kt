@@ -1,8 +1,8 @@
 package com.anonymous.users.ui.theme.component.properties
 
-
 data class DeviceHolderItemProperties(
-    val id: Int, val name: String,
+    val id: Int,
+    val name: String,
     val genderName: String,
     val mobileNumber: String,
     val stickerItemsProperties: StickerItemsProperties,

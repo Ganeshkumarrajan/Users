@@ -2,11 +2,10 @@ package com.anonymous.users.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.anonymous.users.domain.base.NetworkResult
 import com.anonymous.users.domain.holderList.DeviceHolderDomain
 import com.anonymous.users.domain.holderList.GetDeviceHoldersUseCase
-import com.anonymous.users.domain.base.NetworkResult
 import com.anonymous.users.presentation.base.UIState
-import com.anonymous.users.presentation.list.DeviceHolderMapperDomainToUi
 import com.anonymous.users.ui.theme.component.properties.DeviceHolderItemProperties
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,7 +35,6 @@ class DeviceHolderViewModel @Inject constructor(
                     }
                 }
             }
-
         }
     }
 

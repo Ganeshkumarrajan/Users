@@ -8,10 +8,12 @@ class UserDetailsMapperDomainToUI : DomainToUIMapper<UserDetailsDomain?, UserDet
     override fun map(input: UserDetailsDomain?): UserDetailsUI? =
         input?.let {
             UserDetailsUI(
-                it.firstName ?: "", it.secondName,
-                it.gender, it.phoneNumber, it.imageURL, StickerItemsProperties(
+                it.firstName, it.secondName,
+                it.gender, it.phoneNumber, it.imageURL,
+                StickerItemsProperties(
                     getSticker(it.stickers),
-                ), it.address, it.location,
+                ),
+                it.address, it.location,
                 imageText = getImageText(it.imageURL, it.firstName, it.secondName)
                     ?: ""
             )

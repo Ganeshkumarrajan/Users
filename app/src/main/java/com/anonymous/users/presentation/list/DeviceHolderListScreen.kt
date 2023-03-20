@@ -34,9 +34,7 @@ fun DeviceHolderListScreen(
             else -> {}
         }
     }
-
 }
-
 
 @Composable
 private fun OnSuccess(data: List<DeviceHolderItemProperties>, navController: NavController) {

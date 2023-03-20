@@ -1,5 +1,8 @@
 package com.anonymous.users.ui.theme.component
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,19 +11,23 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.anonymous.users.ui.theme.UsersTheme
+import androidx.core.content.ContextCompat
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.*
+import com.google.maps.android.compose.Circle
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.compose.rememberMarkerState
 
 @Composable
-fun GMapView() {
-    val singapore = LatLng(1.3554117053046808, 103.86454252780209)
+fun GMapView(latLng: LatLng) {
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(singapore, 20f)
+        position = CameraPosition.fromLatLngZoom(latLng, 20f)
     }
 
     Box() {
@@ -34,29 +41,31 @@ fun GMapView() {
                 ),
             cameraPositionState = cameraPositionState
 
-        )
-        {
+        ) {
 
             Circle(
-                center = singapore,
-                strokeColor = MaterialTheme.colors.primary,
-                radius = 15.00
+                center = latLng,
+                strokeColor = MaterialTheme.colors.onError.copy(0.5F),
+                radius = 12.00
             )
 
             Marker(
-                state = rememberMarkerState(position = singapore),
-                title = "Marker1",
-                snippet = "Marker in Singapore",
-                icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                state = rememberMarkerState(position = latLng),
+                icon = bitmapDescriptorFromVector(LocalContext.current, com.anonymous.users.R.drawable.ic_location)
             )
         }
     }
 }
 
-@Preview
-@Composable
-fun PreviewGMapView() {
-    UsersTheme {
-        GMapView()
-    }
+private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
+    val vectorDrawable = ContextCompat.getDrawable(context, vectorResId)
+    vectorDrawable!!.setBounds(0, 0, vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight)
+    val bitmap = Bitmap.createBitmap(
+        vectorDrawable.intrinsicWidth,
+        vectorDrawable.intrinsicHeight,
+        Bitmap.Config.ARGB_8888
+    )
+    val canvas = Canvas(bitmap)
+    vectorDrawable.draw(canvas)
+    return BitmapDescriptorFactory.fromBitmap(bitmap)
 }

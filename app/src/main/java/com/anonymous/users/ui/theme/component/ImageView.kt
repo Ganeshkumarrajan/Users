@@ -19,28 +19,27 @@ import com.anonymous.users.ui.theme.UsersTheme
 import com.anonymous.users.ui.theme.component.properties.UserImageProperties
 
 @Composable
-fun UserImage(properties: UserImageProperties) {
+fun UserImage(properties: UserImageProperties, modifier: Modifier = Modifier) {
     Image(
         painter = rememberAsyncImagePainter(properties.url),
         contentDescription = null,
-        modifier = Modifier
+        modifier = modifier
             .size(48.dp)
             .clip(RoundedCornerShape(24.dp))
     )
-
 }
 
 @Composable
-fun FindImageView(imageURL:String, imageText:String){
+fun FindImageView(imageURL: String, imageText: String, modifier: Modifier = Modifier) {
     if (imageURL.isNotEmpty()) {
-        UserImage(UserImageProperties(imageURL))
+        UserImage(UserImageProperties(imageURL), modifier)
     }
 
     if (imageText.isNotEmpty()) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
+            modifier = modifier
                 .size(48.dp)
                 .background(
                     color = MaterialTheme.colors.onSurface,
@@ -49,7 +48,6 @@ fun FindImageView(imageURL:String, imageText:String){
         ) {
             TextImage(
                 name = imageText,
-                modifier = Modifier.wrapContentSize()
             )
         }
     }

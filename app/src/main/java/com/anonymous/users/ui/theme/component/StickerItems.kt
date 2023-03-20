@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -14,17 +13,16 @@ import com.anonymous.users.ui.theme.component.properties.StickerItemsProperties
 import com.anonymous.users.ui.theme.component.properties.StickerValue
 
 @Composable
-fun StickerItems(properties: StickerItemsProperties) {
+fun StickerItems(properties: StickerItemsProperties, modifier: Modifier = Modifier) {
     LazyRow() {
         items(properties.defaultNames) { sticker ->
-            Box(modifier = Modifier.padding(start = 8.dp)) {
+            Box(modifier = modifier) {
                 if (sticker.isSelected) {
-                    SelectedStickersName(sticker.name, modifier = Modifier)
+                    SelectedStickersName(sticker.name, modifier = Modifier.padding(start = 7.dp))
                 } else {
-                    StickersName(name = sticker.name, modifier = Modifier)
+                    StickersName(name = sticker.name, modifier = Modifier.padding(start = 7.dp))
                 }
             }
-
         }
     }
 }

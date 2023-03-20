@@ -1,7 +1,6 @@
-package com.anonymous.users.domain
+package com.anonymous.users.domain.details
 
 import com.anonymous.users.domain.base.NetworkResult
-import com.anonymous.users.domain.details.UserDetailsDomain
 import com.anonymous.users.domain.repository.DeviceHolderRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -22,5 +21,4 @@ class GetUserDetailsUseCaseImpl(private val repository: DeviceHolderRepository) 
             it.localizedMessage
             emit(NetworkResult.Error())
         }.flowOn(Dispatchers.IO)
-
 }

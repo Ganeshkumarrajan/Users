@@ -1,8 +1,8 @@
 package com.anonymous.users.presentation.di
 
 import com.anonymous.users.data.DeviceHolderRepositoryImpl
-import com.anonymous.users.domain.GetUserDetailsUseCase
-import com.anonymous.users.domain.GetUserDetailsUseCaseImpl
+import com.anonymous.users.domain.details.GetUserDetailsUseCase
+import com.anonymous.users.domain.details.GetUserDetailsUseCaseImpl
 import com.anonymous.users.domain.holderList.GetDeviceHoldersUseCase
 import com.anonymous.users.domain.holderList.GetDeviceHoldersUseCaseImpl
 import dagger.Module
