@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.anonymous.users.domain.base.NetworkResult
 import com.anonymous.users.domain.holderList.DeviceHolderDomain
 import com.anonymous.users.domain.holderList.GetDeviceHoldersUseCase
+import com.anonymous.users.presentation.base.DomainToUIMapper
 import com.anonymous.users.presentation.base.UIState
 import com.anonymous.users.ui.theme.component.properties.DeviceHolderItemProperties
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DeviceHolderViewModel @Inject constructor(
     private val useCase: GetDeviceHoldersUseCase,
-    private val mapper: DeviceHolderMapperDomainToUi
+    private val mapper: DomainToUIMapper<List<DeviceHolderDomain>, List<DeviceHolderItemProperties>>
 ) : ViewModel() {
     private val _holders =
         MutableStateFlow<UIState<List<DeviceHolderItemProperties>>>(UIState.Nothing())
